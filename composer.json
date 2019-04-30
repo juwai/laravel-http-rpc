@@ -1,0 +1,23 @@
+{
+    "name": "juwai/laravel-http-rpc",
+    "description": "Laravel package for http rpc client",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Juwai Limited",
+            "email": "engineering@juwai.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Juwai\\LaravelHTTPRPC\\": "src/"
+        }
+    },
+    "suggest": {
+        "barryvdh/laravel-debugbar": "Required to display RPC connection information on Debugbar (2.4.*)."
+    }
+}
