@@ -5,9 +5,9 @@ class HTTPRPCFactory
 {
     private static $_clients = [];
 
-    public function get($serviceName, $version, $timeout = null)
+    public function get($serviceName, $version, $timeout = null, $method = 'GET')
     {
-        $key = $serviceName . $version . $timeout;
+        $key = $serviceName . $version . $timeout. $method;
         if (array_key_exists($key, self::$_clients)) {
             return self::$_clients[$key];
         }
@@ -16,7 +16,8 @@ class HTTPRPCFactory
         }
         $options = [
             'base_uri' => config('httprpc.HTTP_RPC_' . strtoupper($serviceName))[$version] . '/',
-            'timeout' => $timeout
+            'timeout' => $timeout / 1000,
+            'method' => $method
         ];
         $client = new HTTPRPCClient($options);
         self::$_clients[$key] = $client;
@@ -24,9 +25,9 @@ class HTTPRPCFactory
         return $client;
     }
 
-    public function destroyClient($serviceName, $version, $timeout = null)
+    public function destroyClient($serviceName, $version, $timeout = null, $method = 'GET')
     {
-        $key = $serviceName . $version . $timeout;
+        $key = $serviceName . $version . $timeout. $method;
         unset(self::$_clients[$key]);
     }
 }
