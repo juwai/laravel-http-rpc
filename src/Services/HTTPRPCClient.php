@@ -43,6 +43,11 @@ class HTTPRPCClient extends Client
         } else {
             // Only pass the first argument as the request body
             $body = $args[0] ?? [];
+            foreach ($body as $key => $value) {
+                if (is_array($value)) {
+                    $body[$key] = json_encode($value);
+                }
+            }
 
             $response = $this->request('POST', $queryString, [
                 'form_params' => $body
