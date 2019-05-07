@@ -31,9 +31,16 @@ This package provides an easy way of connecting to HTTP RPC.
 
 ## Usage
 
+### GET method
 ```php
 $client = HTTPRPC::get('service_one', '1.0');
 $response = $client->service_function($param1, $param2);
+```
+
+### POST method
+```php
+$client = HTTPRPC::get('service_one', '1.0', 2000, 'POST');
+$response = $client->service_function(['param1' => $param1, 'param2' => $param2]);
 ```
 
 ## Connection monitor

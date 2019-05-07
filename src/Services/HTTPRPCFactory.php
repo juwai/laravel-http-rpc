@@ -14,10 +14,12 @@ class HTTPRPCFactory
         if ($timeout == null) {
             $timeout = env('DEFAULT_RPC_TIMEOUT', 1000);
         }
+        $accessKey = config('httprpc.HTTP_RPC_' . strtoupper($serviceName))['access_key'];
         $options = [
             'base_uri' => config('httprpc.HTTP_RPC_' . strtoupper($serviceName))[$version] . '/',
             'timeout' => $timeout / 1000,
-            'method' => $method
+            'method' => $method,
+            'headers' => ['access_key' => $accessKey]
         ];
         $client = new HTTPRPCClient($options);
         self::$_clients[$key] = $client;
